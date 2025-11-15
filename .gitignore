@@ -1,0 +1,63 @@
+# ==========================
+# FRONTEND
+# ==========================
+
+# Node modules
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/build/
+frontend/.next/
+
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.development
+frontend/.env.production
+frontend/.env.test
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# OS files
+frontend.DS_Store
+frontend/Thumbs.db
+
+# ==========================
+# BACKEND
+# ==========================
+
+# Node modules
+backend/node_modules/
+
+# Logs
+backend/logs/
+backend/*.log
+backend/npm-debug.log*
+
+# Environment variables
+backend/.env
+
+# Build output (if any)
+backend/dist/
+backend/build/
+
+# OS files
+backend.DS_Store
+backend/Thumbs.db
+
+# ==========================
+# COMMON / GENERAL
+# ==========================
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
