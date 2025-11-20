@@ -1,3 +1,5 @@
+# Token
+
 A token is like a digital ID card you get after login.
 You enter your username and password only one time.
 The server checks and gives you a token.
