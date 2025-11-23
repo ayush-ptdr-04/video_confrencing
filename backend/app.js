@@ -3,12 +3,12 @@ import { createServer } from "node:http";
 import { Server } from "socket.io";
 import mongoose, { mongo } from "mongoose";
 import cors from "cors";
-import { connnectToSocket } from "./src/controllers/socketManager.js";
+import { connectToSocket } from "./src/controllers/socketManager.js";
 import userRoutes from "./src/routes/users.routes.js";
 
 const app = express(); // it's normal express server
 const server = createServer(app); // convert express server to http-server
-const io = connnectToSocket(server); // http server attache to socket.io
+const io = connectToSocket(server); // http server attache to socket.io
 
 app.set("port", process.env.PORT || 8000);
 app.use(cors());
