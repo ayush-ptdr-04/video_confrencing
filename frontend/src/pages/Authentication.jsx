@@ -15,6 +15,16 @@ import Checkbox from "@mui/material/Checkbox";
 const defaultTheme = createTheme();
 
 export default function Authentication() {
+  const [username, setUsername] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [name, setName] = React.useState();
+  const [error, setError] = React.useState();
+  const [message, setMessage] = React.useState();
+
+  const [formState, setFormState] = React.useState(0);
+
+  const [open, setOpen] = React.useState(false);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -51,19 +61,46 @@ export default function Authentication() {
               <LockOutlinedIcon />
             </Avatar>
 
-            <Typography component="h1" variant="h5">
-              Sign In
-            </Typography>
+            <div>
+              <Button
+                variant={formState === 0 ? "contained" : ""}
+                onClick={() => {
+                  setFormState(0);
+                }}
+              >
+                Sign In
+              </Button>
+              <Button
+                variant={formState === 1 ? "contained" : ""}
+                onClick={() => setFormState(1)}
+              >
+                Sign Up
+              </Button>
+            </div>
 
             <Box component="form" noValidate sx={{ mt: 1 }}>
+              {formState === 1 ? (
+                <TextField
+                  margin="normal"
+                  name="username"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Full Nmae"
+                  autoFocus
+                />
+              ) : (
+                <></>
+              )}
+
               <TextField
                 margin="normal"
-                name="email"
+                name="username"
                 required
                 fullWidth
-                id="email"
-                label="Email address"
-                autoComplete="email"
+                id="username"
+                label="username"
+                autoFocus
               />
               <TextField
                 margin="normal"
@@ -71,8 +108,9 @@ export default function Authentication() {
                 fullWidth
                 label="Password"
                 type="password"
+                name="password"
+                autoFocus
               />
-
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remeber me"
