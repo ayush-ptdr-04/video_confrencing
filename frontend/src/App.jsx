@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Route, Router, Routes } from "react-router-dom";
 import { Landing } from "./pages/landing";
-import { Authentication } from "./pages/Authentication";
+import Authentication from "./pages/Authentication";
 
 function App() {
   const [count, setCount] = useState(0);
