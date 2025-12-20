@@ -11,19 +11,45 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Snackbar from "@mui/material/Snackbar";
+import { AuthContext } from "../contexts/AuthContext";
 
 const defaultTheme = createTheme();
 
 export default function Authentication() {
-  const [username, setUsername] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [name, setName] = React.useState();
-  const [error, setError] = React.useState();
-  const [message, setMessage] = React.useState();
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   const [formState, setFormState] = React.useState(0);
 
   const [open, setOpen] = React.useState(false);
+
+  const { handleRegister, handleLogin } = React.useContext(AuthContext);
+
+  let handleAuth = async () => {
+    try {
+      if (formState === 0) {
+        let result = await handleLogin(username, password);
+      }
+      if (formState === 1) {
+        let result = await handleRegister(name, username, password);
+        console.log(result);
+        setUsername("");
+        setMessage(result);
+        setOpen(true);
+        setError("");
+        setFormState(0);
+        setPassword("");
+      }
+    } catch (err) {
+      console.log(err);
+      let message = err.response.data.message;
+      setError(message);
+    }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -82,12 +108,14 @@ export default function Authentication() {
               {formState === 1 ? (
                 <TextField
                   margin="normal"
-                  name="username"
+                  name="name"
                   required
                   fullWidth
-                  id="username"
-                  label="Full Nmae"
+                  id="name"
+                  label="Full Name"
                   autoFocus
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               ) : (
                 <></>
@@ -100,7 +128,8 @@ export default function Authentication() {
                 fullWidth
                 id="username"
                 label="username"
-                autoFocus
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -109,19 +138,27 @@ export default function Authentication() {
                 label="Password"
                 type="password"
                 name="password"
-                autoFocus
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remeber me"
-              />
-              <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign In
+
+              <p style={{ color: "red" }}>{error}</p>
+
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleAuth}
+              >
+                {formState === 0 ? "Login " : "Register"}
               </Button>
             </Box>
           </Box>
         </Grid>
       </Grid>
+
+      <Snackbar open={open} autoHideDuration={4000} message={message} />
     </ThemeProvider>
   );
 }
