@@ -18,11 +18,15 @@ const login = async (req, res) => {
         .json({ message: "User not found" });
     }
     // bcrypt.compare():this method internally changed plain text to hashed then compare
-    if (bcrypt.compare(password, user.password)) {
+    if (await bcrypt.compare(password, user.password)) {
       let token = crypto.randomBytes(20).toString("hex");
       user.token = token;
       await user.save();
       return res.status(httpStatus.OK).json({ token: token }); // token send to frontend
+    } else {
+      return res
+        .status(httpStatus.OK)
+        .json({ message: "Invalid username or password" });
     }
   } catch (error) {
     return res.status(500).json({ message: `Something went wrong${error}` });

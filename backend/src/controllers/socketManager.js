@@ -19,6 +19,7 @@ export const connectToSocket = (server) => {
 
   // it triggerd everyTime, when browser connect(socket)
   io.on("connection", (socket) => {
+    console.log("SOMETHING CONNECTED");
     // when user join the room(path is meetingID)
     socket.on("join-call", (path) => {
       if (connesctions[path] === undefined) {
@@ -30,7 +31,7 @@ export const connectToSocket = (server) => {
       timeOnline[socket.id] = new Date();
 
       // already-joined users ko batana(msg) newUser Joined
-      for (let a = 0; a < connesctions[path].length; i++) {
+      for (let a = 0; a < connesctions[path].length; a++) {
         io.to(connesctions[path][a]).emit(
           "user-joined",
           socket.id,
@@ -75,7 +76,7 @@ export const connectToSocket = (server) => {
           data: data,
           "socket-id-sender": socket.id,
         });
-        console.log("message", key, ":", sender, data);
+        console.log("message", matchingRoom, ":", sender, data);
         connesctions[matchingRoom].forEach((elem) => {
           io.to(elem).emit("chat-message", data, sender, socket.id);
         });
