@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Route, Router, Routes } from "react-router-dom";
-import { Landing } from "./pages/landing";
+import { Landing } from "./pages/Landing";
 import Authentication from "./pages/Authentication";
 import { AuthProvider } from "./contexts/AuthContext";
 import { VideoMeet } from "./pages/VideoMeet";
