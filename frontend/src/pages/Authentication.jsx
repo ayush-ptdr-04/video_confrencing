@@ -7,10 +7,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Snackbar from "@mui/material/Snackbar";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -63,10 +60,13 @@ export default function Authentication() {
           sm={4}
           md={7}
           sx={{
-            height: "100vh", // add this
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0')",
+              "url(https://source.unsplash.com/random?wallpapers)",
             backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

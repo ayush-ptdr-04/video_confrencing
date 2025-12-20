@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import withAuth from "../utils/withAuth";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
@@ -10,6 +10,7 @@ export const Home = () => {
   let navigate = useNavigate();
   const [meetingCode, setMeetingCode] = useState("");
 
+  const { addToUserHistory } = useContext(AuthContext);
   let handleJoinVideoCall = async () => {
     await addToUserHistory(meetingCode);
     navigate(`/${meetingCode}`);
