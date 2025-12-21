@@ -9,7 +9,7 @@ export const Landing = () => {
     <div className="landingPageContainer">
       <nav>
         <div className="navHeader">
-          <h2>Meet Young Decade</h2>
+          <h2>Video Confrencing</h2>
         </div>
         <div className="navList">
           <p onClick={() => router("/aayush")}>Join as Guest</p>
