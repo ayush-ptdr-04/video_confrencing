@@ -45,7 +45,17 @@ export const Landing = () => {
         </div>
 
         <div>
-          <img src="/mobile.png" alt="" srcset="" />
+          <img
+            style={{
+              width: "100%",
+              maxWidth: "450px",
+              height: "auto",
+              borderRadius: "20px",
+            }}
+            src="/mobile.png"
+            alt=""
+            srcset=""
+          />
         </div>
       </div>
     </div>
